@@ -1,0 +1,564 @@
+@import 'variables', 'mixins', 'animations';
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-primary;
+  line-height: 1.6;
+  color: $text-dark;
+  background: $background-light;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+  
+  @include respond-to(md) {
+    padding: 0 $spacing-md;
+  }
+}
+
+// Header styles
+.header {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  @include flex-center;
+  background: $gradient;
+  
+  .header-background {
+    @include absolute-center;
+    width: 100%;
+    height: 100%;
+    
+    .floating-shapes {
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba($white, 0.1);
+        
+        &.shape-1 {
+          width: 200px;
+          height: 200px;
+          top: 10%;
+          left: 10%;
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        &.shape-2 {
+          width: 150px;
+          height: 150px;
+          top: 60%;
+          right: 10%;
+          animation: float 4s ease-in-out infinite reverse;
+        }
+        
+        &.shape-3 {
+          width: 100px;
+          height: 100px;
+          bottom: 20%;
+          left: 20%;
+          animation: float 5s ease-in-out infinite;
+        }
+      }
+    }
+  }
+  
+  .header-content {
+    text-align: center;
+    color: $white;
+    z-index: 2;
+    position: relative;
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 99px;
+    }
+    .name {
+      font-family: $font-heading;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: $spacing-sm;
+      animation: fadeInUp 0.8s ease-out;
+      
+      @include respond-to(md) {
+        font-size: 4.5rem;
+      }
+    }
+    
+    .title {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: $spacing-lg;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: $white;
+      animation: pulse 2s infinite;
+      
+      .arrow {
+        width: 2px;
+        height: 30px;
+        background: $white;
+        margin: $spacing-xs auto 0;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: -4px;
+          width: 10px;
+          height: 10px;
+          border-right: 2px solid $white;
+          border-bottom: 2px solid $white;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+}
+
+// Section common styles
+.section {
+  padding: $spacing-xl 0;
+  
+  .section-title {
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    @include gradient-text;
+    
+    @include respond-to(md) {
+      font-size: 3rem;
+    }
+  }
+}
+
+// About section
+.about-section {
+  background: $white;
+  
+  .about-content {
+    display: grid;
+    gap: $spacing-lg;
+    
+    @include respond-to(md) {
+      grid-template-columns: 2fr 1fr;
+      align-items: center;
+    }
+    
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: $text-light;
+      
+      p {
+        margin-bottom: $spacing-sm;
+      }
+    }
+    
+    .about-visual {
+      @include flex-center;
+      
+      .code-animation {
+        .code-line {
+          height: 4px;
+          background: $gradient;
+          margin-bottom: 8px;
+          border-radius: 2px;
+          animation: pulse 2s infinite;
+          
+          &:nth-child(1) {
+            width: 100px;
+            animation-delay: 0s;
+          }
+          
+          &:nth-child(2) {
+            width: 150px;
+            animation-delay: 0.5s;
+          }
+          
+          &:nth-child(3) {
+            width: 80px;
+            animation-delay: 1s;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Skills section
+.skills-section {
+  background: $background-light;
+  
+  .skills-grid {
+    display: grid;
+    gap: $spacing-md;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    .skill-card {
+      background: $white;
+      padding: $spacing-sm;
+      border-radius: $border-radius-lg;
+      box-shadow: $shadow-md;
+      text-align: center;
+      @include card-hover;
+      animation: fadeInUp 0.6s ease-out both;
+      
+      .skill-icon {
+        font-size: 2.5rem;
+        margin-bottom: $spacing-sm;
+        @include gradient-text;
+      }
+      
+      .skill-name {
+        font-family: $font-heading;
+        font-size: 1.25rem;
+        margin-bottom: $spacing-sm;
+        color: $text-dark;
+      }
+      
+      .skill-level {
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        margin-bottom: $spacing-xs;
+        overflow: hidden;
+        
+        .skill-progress {
+          height: 100%;
+          background: $gradient;
+          border-radius: 4px;
+          animation: progress 1.5s ease-in-out;
+        }
+      }
+      
+      .skill-percentage {
+        font-size: 0.875rem;
+        color: $text-light;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Experience section
+.experience-section {
+  background: $white;
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: $gradient;
+      transform: translateX(-50%);
+      
+      @include respond-to(md) {
+        left: 50%;
+      }
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: $spacing-lg;
+      width: 100%;
+      
+      @include respond-to(md) {
+        width: calc(50% - #{$spacing-md});
+        
+        &.timeline-item-right {
+          left: calc(50% + #{$spacing-md});
+        }
+        
+        &:not(.timeline-item-right) {
+          left: 0;
+        }
+      }
+      
+      .timeline-marker {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: $white;
+        border: 4px solid $primary-color;
+        border-radius: 50%;
+        top: $spacing-sm;
+        
+        @include respond-to(md) {
+          left: calc(100% + 10px);
+        }
+        
+        @include respond-to(md) {
+          left: auto;
+          right: -10px;
+        }
+        
+        .timeline-item-right & {
+          @include respond-to(md) {
+            left: -10px;
+            right: auto;
+          }
+        }
+      }
+      
+      .timeline-content {
+        background: $white;
+        padding: $spacing-md;
+        border-radius: $border-radius-lg;
+        box-shadow: $shadow-lg;
+        
+        @include respond-to(md) {
+          margin-left: 0;
+        }
+        
+        .job-title {
+          font-family: $font-heading;
+          font-size: 1.25rem;
+          color: $primary-color;
+          margin-bottom: $spacing-xs;
+        }
+        
+        .company {
+          font-size: 1.1rem;
+          color: $text-dark;
+          margin-bottom: $spacing-xs;
+        }
+        
+        .period {
+          display: inline-block;
+          background: $gradient;
+          color: $white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.875rem;
+          margin-bottom: $spacing-sm;
+        }
+        
+        .job-description {
+          color: $text-light;
+          margin-bottom: $spacing-sm;
+          line-height: 1.6;
+        }
+        
+        .job-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacing-xs;
+          
+          .tech-tag {
+            background: rgba($primary-color, 0.1);
+            color: $primary-color;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Education section
+.education-section {
+  background: $background-light;
+  
+  .education-cards {
+    display: grid;
+    gap: $spacing-md;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    
+    .education-card {
+      background: $white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-lg;
+      box-shadow: $shadow-md;
+      text-align: center;
+      @include card-hover;
+      
+      .education-icon {
+        font-size: 3rem;
+        margin-bottom: $spacing-md;
+        @include gradient-text;
+      }
+      
+      .degree {
+        font-family: $font-heading;
+        font-size: 1.25rem;
+        color: $text-dark;
+        margin-bottom: $spacing-xs;
+      }
+      
+      .institution {
+        font-size: 1.1rem;
+        color: $primary-color;
+        margin-bottom: $spacing-xs;
+      }
+      
+      .education-period {
+        display: inline-block;
+        background: $gradient;
+        color: $white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        margin-bottom: $spacing-sm;
+      }
+      
+      .education-description {
+        color: $text-light;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// Contacts section
+.contacts-section {
+  background: $white;
+  
+  .contacts-content {
+    .contact-info {
+      .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacing-md;
+        padding: $spacing-sm;
+        background: $background-light;
+        border-radius: $border-radius;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateX(10px);
+          background: rgba($primary-color, 0.05);
+        }
+        
+        .contact-icon {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          @include flex-center;
+          margin-right: $spacing-md;
+          color: $white;
+          font-size: 1.25rem;
+        }
+        .contact-img {
+          width: 30px;
+          height: 30px;
+        }
+        .contact-details {
+          h3 {
+            font-family: $font-heading;
+            color: $text-dark;
+            margin-bottom: 4px;
+          }
+          
+          a {
+            color: $text-light;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            
+            &:hover {
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+    
+    .contact-form {
+      background: $background-light;
+      padding: $spacing-lg;
+      border-radius: $border-radius-lg;
+      
+      h3 {
+        font-family: $font-heading;
+        margin-bottom: $spacing-md;
+        color: $text-dark;
+      }
+      
+      .form-group {
+        margin-bottom: $spacing-md;
+        
+        input, textarea {
+          width: 100%;
+          padding: 12px 16px;
+          border: 2px solid #e2e8f0;
+          border-radius: $border-radius;
+          font-family: $font-primary;
+          font-size: 1rem;
+          transition: border-color 0.3s ease;
+          
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+        
+        textarea {
+          height: 120px;
+          resize: vertical;
+        }
+      }
+      
+      .submit-btn {
+        width: 100%;
+        background: $gradient;
+        color: $white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: $border-radius;
+        font-family: $font-heading;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: $shadow-md;
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@include respond-to(sm) {
+  .container {
+    padding: 0 $spacing-md;
+  }
+}
+
+// Utility classes
+.text-gradient {
+  @include gradient-text;
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
